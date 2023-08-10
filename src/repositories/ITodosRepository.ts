@@ -2,5 +2,5 @@ import { Todo } from "../entities/Todo";
 
 export interface ITodosRepository {
   save(todo: Todo): Promise<any>;
-  list(): Promise<Array<any>>;
+  list(): Promise<string>;
 }

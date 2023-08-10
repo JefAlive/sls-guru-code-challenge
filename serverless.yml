@@ -2,7 +2,6 @@ org: jefalive
 app: sls-guru-code-challenge-api
 service: aws-node-http-api-project
 frameworkVersion: '3'
-useDotenv: true
 
 provider:
   name: aws
@@ -30,9 +29,10 @@ plugins:
 custom:
   serverless-dynamodb:
     stages:
-      - dev
+      - local
     start:
       port: 8000
+      docker: false
       inMemory: true
       heapInitial: 200m
       heapMax: 1g
@@ -47,6 +47,13 @@ functions:
       - httpApi:
           path: /todos
           method: post
+
+  list:
+    handler: dist/useCases/Todos/ListTodo/handler.handler
+    events:
+      - httpApi:
+          path: /todos
+          method: get
 
 resources:
   Resources:

@@ -14,13 +14,14 @@ export class CreateTodoController {
     })
     const todo = todoSchema.parse(JSON.parse(event.body))
 
-    await this.createTodoUseCase.execute(todo)
+    const result = await this.createTodoUseCase.execute(todo)
 
     return {
       statusCode: 200,
       body: JSON.stringify(
         {
-          message: "Created Todo."
+          message: "Created Todo.",
+          ...result
         }
       )
     }
