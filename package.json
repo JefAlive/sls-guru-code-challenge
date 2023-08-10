@@ -5,6 +5,7 @@
   "author": "Jeferson Kersten",
   "scripts": {
     "build": "tsup src",
+    "dev": "tsup src && serverless offline",
     "test": "vitest"
   },
   "engines": {
