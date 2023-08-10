@@ -9,7 +9,6 @@ export class CreateTodoUseCase {
 
   async execute(data: ICreateTodoRequestDTO) {
     const todo = new Todo(data);
-    await this.todoRepository.save({});
-    return {}
+    return await this.todoRepository.save(todo);
   }
 }
