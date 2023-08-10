@@ -4,6 +4,8 @@ export class Todo {
   }
 
   public readonly id?: string;
-  public status?: string;
+  public checked?: string;
   public description?: string;
+  public createdAt?: Date;
+  public updatedAt?: Date;
 }
