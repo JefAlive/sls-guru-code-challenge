@@ -12,7 +12,7 @@ plugins:
 
 functions:
   api:
-    handler: dist/useCases/Todos/CreateTodo/handler
+    handler: dist/useCases/Todos/CreateTodo/handler.handler
     events:
       - httpApi:
           path: /todos
