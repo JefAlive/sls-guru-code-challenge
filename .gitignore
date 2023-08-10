@@ -6,4 +6,4 @@ jspm_packages
 .serverless
 
 # Output directory
-.dist
+dist
