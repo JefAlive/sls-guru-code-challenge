@@ -15,5 +15,5 @@ functions:
     handler: dist/useCases/Todos/CreateTodo/handler
     events:
       - httpApi:
-          path: /
-          method: get
+          path: /todos
+          method: post
