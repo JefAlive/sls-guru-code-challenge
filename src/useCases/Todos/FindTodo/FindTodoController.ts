@@ -1,7 +1,7 @@
-import { FindTodoUseCase } from "./FindTodoUseCase"
+import { FindTodoUseCase } from './FindTodoUseCase'
 
 export class FindTodoController {
-  constructor(
+  constructor (
     private findTodoUseCase: FindTodoUseCase
   ) {}
 

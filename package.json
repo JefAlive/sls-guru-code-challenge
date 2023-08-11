@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsup src",
     "dev": "tsup src && serverless offline --stage local",
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "eslint 'src/**' --fix"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -14,7 +15,14 @@
   "devDependencies": {
     "@types/aws-sdk": "^2.7.0",
     "@types/node": "^20.4.9",
+    "@typescript-eslint/eslint-plugin": "^6.3.0",
+    "@typescript-eslint/parser": "^6.3.0",
     "aws-sdk": "^2.1434.0",
+    "eslint": "^8.46.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.28.0",
+    "eslint-plugin-n": "^15.7.0",
+    "eslint-plugin-promise": "^6.1.1",
     "serverless-dynamodb": "^0.2.43",
     "serverless-offline": "^12.0.4",
     "tsup": "^7.2.0",

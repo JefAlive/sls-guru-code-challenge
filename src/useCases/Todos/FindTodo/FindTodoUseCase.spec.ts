@@ -1,9 +1,9 @@
 import { vi, expect, test, beforeEach, describe } from 'vitest'
-import { FindTodoUseCase } from "./FindTodoUseCase";
+import { FindTodoUseCase } from './FindTodoUseCase'
 
 describe('when find todo', () => {
-  let useCase, repositoryMock;
-  
+  let useCase, repositoryMock
+
   beforeEach(() => {
     repositoryMock = {
       save: vi.fn(),
@@ -14,7 +14,7 @@ describe('when find todo', () => {
       edit: vi.fn(),
       delete: vi.fn()
     }
-    useCase = new FindTodoUseCase(repositoryMock);
+    useCase = new FindTodoUseCase(repositoryMock)
   })
 
   test('success with valid uuid param', async () => {

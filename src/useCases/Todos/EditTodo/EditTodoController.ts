@@ -1,7 +1,7 @@
-import { EditTodoUseCase } from "./EditTodoUseCase"
+import { EditTodoUseCase } from './EditTodoUseCase'
 
 export class EditTodoController {
-  constructor(
+  constructor (
     private editTodoUseCase: EditTodoUseCase
   ) {}
 
@@ -15,7 +15,7 @@ export class EditTodoController {
       statusCode: 200,
       body: JSON.stringify(
         {
-          message: "Edited Todo."
+          message: 'Edited Todo.'
         }
       )
     }

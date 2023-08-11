@@ -1,7 +1,7 @@
-import { CreateTodoUseCase } from "./CreateTodoUseCase"
+import { CreateTodoUseCase } from './CreateTodoUseCase'
 
 export class CreateTodoController {
-  constructor(
+  constructor (
     private createTodoUseCase: CreateTodoUseCase
   ) {}
 
@@ -12,7 +12,7 @@ export class CreateTodoController {
       statusCode: 200,
       body: JSON.stringify(
         {
-          message: "Created Todo."
+          message: 'Created Todo.'
         }
       )
     }

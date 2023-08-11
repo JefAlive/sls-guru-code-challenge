@@ -1,11 +1,11 @@
-import { ITodosRepository } from "../../../repositories/ITodosRepository";
+import { ITodosRepository } from '../../../repositories/ITodosRepository'
 
 export class ListTodoUseCase {
-  constructor(
+  constructor (
     private todoRepository: ITodosRepository
   ) {}
 
-  async execute() {
-    return await this.todoRepository.list();
+  async execute () {
+    return await this.todoRepository.list()
   }
 }

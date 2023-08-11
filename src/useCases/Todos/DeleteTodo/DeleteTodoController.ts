@@ -1,7 +1,7 @@
-import { DeleteTodoUseCase } from "./DeleteTodoUseCase"
+import { DeleteTodoUseCase } from './DeleteTodoUseCase'
 
 export class DeleteTodoController {
-  constructor(
+  constructor (
     private deleteTodoUseCase: DeleteTodoUseCase
   ) {}
 

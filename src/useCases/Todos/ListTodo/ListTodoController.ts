@@ -1,7 +1,7 @@
-import { ListTodoUseCase } from "./ListTodoUseCase"
+import { ListTodoUseCase } from './ListTodoUseCase'
 
 export class ListTodoController {
-  constructor(
+  constructor (
     private listTodoUseCase: ListTodoUseCase
   ) {}
 

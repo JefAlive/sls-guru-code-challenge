@@ -1,19 +1,19 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid'
 
 export class Todo {
-  constructor(props: Omit<Todo, "id">, id?: string) {
-    Object.assign(this, props);
+  constructor (props: Omit<Todo, 'id'>, id?: string) {
+    Object.assign(this, props)
     if (!id) {
-      this.id = uuid();
+      this.id = uuid()
     }
     if (!this.checked) {
-      this.checked = false;
+      this.checked = false
     }
   }
 
-  public readonly id?: string;
-  public checked?: boolean;
-  public description?: string;
-  public createdAt?: Date;
-  public updatedAt?: Date;
+  public readonly id?: string
+  public checked?: boolean
+  public description?: string
+  public createdAt?: Date
+  public updatedAt?: Date
 }

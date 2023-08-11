@@ -1,10 +1,10 @@
 import { vi, expect, test, beforeEach, describe } from 'vitest'
-import { EditTodoUseCase } from "./EditTodoUseCase";
-import { Todo } from '../../../entities/Todo';
+import { EditTodoUseCase } from './EditTodoUseCase'
+import { Todo } from '../../../entities/Todo'
 
 describe('when updates todo', () => {
-  let useCase, repositoryMock;
-  
+  let useCase, repositoryMock
+
   beforeEach(() => {
     repositoryMock = {
       save: vi.fn(),
@@ -13,7 +13,7 @@ describe('when updates todo', () => {
       edit: vi.fn(),
       delete: vi.fn()
     }
-    useCase = new EditTodoUseCase(repositoryMock);
+    useCase = new EditTodoUseCase(repositoryMock)
   })
 
   test('success with valid uuid, description and checked attributes', async () => {
@@ -58,10 +58,10 @@ describe('when updates todo', () => {
   test('description needs to be 255 or fewer characters long', async () => {
     const uuid = '57624280-37f7-11ee-be56-0242ac120002'
     // string with 266 characters
-    let description =
-      "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789" +
-      "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789" +
-      "01234567890123456789012345678901234567890123456789012345"
+    const description =
+      '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789' +
+      '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789' +
+      '01234567890123456789012345678901234567890123456789012345'
     const updateAttributes = {
       description,
       checked: true

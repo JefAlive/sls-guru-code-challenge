@@ -1,9 +1,9 @@
 import { vi, expect, test, beforeEach, describe } from 'vitest'
-import { ListTodoUseCase } from "./ListTodoUseCase";
+import { ListTodoUseCase } from './ListTodoUseCase'
 
 describe('when list todos', () => {
-  let useCase, repositoryMock;
-  
+  let useCase, repositoryMock
+
   beforeEach(() => {
     repositoryMock = {
       save: vi.fn(),
@@ -12,7 +12,7 @@ describe('when list todos', () => {
       edit: vi.fn(),
       delete: vi.fn()
     }
-    useCase = new ListTodoUseCase(repositoryMock);
+    useCase = new ListTodoUseCase(repositoryMock)
   })
 
   test('receives results from repository', async () => {

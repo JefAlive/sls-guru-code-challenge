@@ -1,9 +1,9 @@
 import { vi, expect, test, beforeEach, describe } from 'vitest'
-import { DeleteTodoUseCase } from "./DeleteTodoUseCase";
+import { DeleteTodoUseCase } from './DeleteTodoUseCase'
 
 describe('when deletes todo', () => {
-  let useCase, repositoryMock;
-  
+  let useCase, repositoryMock
+
   beforeEach(() => {
     repositoryMock = {
       save: vi.fn(),
@@ -12,7 +12,7 @@ describe('when deletes todo', () => {
       edit: vi.fn(),
       delete: vi.fn()
     }
-    useCase = new DeleteTodoUseCase(repositoryMock);
+    useCase = new DeleteTodoUseCase(repositoryMock)
   })
 
   test('success with valid uuid param', async () => {

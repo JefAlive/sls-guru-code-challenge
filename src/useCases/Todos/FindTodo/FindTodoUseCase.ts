@@ -1,15 +1,15 @@
-import { ITodosRepository } from "../../../repositories/ITodosRepository"
-import { z } from "zod"
+import { ITodosRepository } from '../../../repositories/ITodosRepository'
+import { z } from 'zod'
 
 export class FindTodoUseCase {
-  constructor(
+  constructor (
     private todoRepository: ITodosRepository
   ) {}
 
-  async execute(id: string) {
+  async execute (id: string) {
     z.string()
-      .uuid({ message: "Must be a valid UUID v4" })
-      .parse(id);
-    return await this.todoRepository.find(id);
+      .uuid({ message: 'Must be a valid UUID v4' })
+      .parse(id)
+    return await this.todoRepository.find(id)
   }
 }

@@ -1,9 +1,9 @@
 import { vi, expect, test, beforeEach, describe } from 'vitest'
-import { CreateTodoUseCase } from "./CreateTodoUseCase";
+import { CreateTodoUseCase } from './CreateTodoUseCase'
 
 describe('when saves todo', () => {
-  let useCase, repositoryMock;
-  
+  let useCase, repositoryMock
+
   beforeEach(() => {
     repositoryMock = {
       save: vi.fn(),
@@ -12,7 +12,7 @@ describe('when saves todo', () => {
       edit: vi.fn(),
       delete: vi.fn()
     }
-    useCase = new CreateTodoUseCase(repositoryMock);
+    useCase = new CreateTodoUseCase(repositoryMock)
   })
 
   test('success with valid uuid and description and not checked by default', async () => {
@@ -33,12 +33,12 @@ describe('when saves todo', () => {
 
   test('description needs to be 255 or fewer characters long', async () => {
     // string with 266 characters
-    let description =
-      "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789" +
-      "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789" +
-      "01234567890123456789012345678901234567890123456789012345"
+    const description =
+      '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789' +
+      '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789' +
+      '01234567890123456789012345678901234567890123456789012345'
 
-    await expect(useCase.execute({ description: description })).rejects.toThrowError('255 or fewer')
+    await expect(useCase.execute({ description })).rejects.toThrowError('255 or fewer')
     expect(repositoryMock.save).not.toHaveBeenCalled()
   })
 })
