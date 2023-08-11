@@ -10,7 +10,7 @@ export class ListTodoController {
 
     return {
       statusCode: 200,
-      body: todos
+      body: JSON.stringify(todos)
     }
   }
 }

@@ -31,12 +31,12 @@ export class DynamodbTodosRepository implements ITodosRepository {
     return await docClient.send(command);
   }
   
-  async list(): Promise<string> {
+  async list(): Promise<any> {
     const command = new ScanCommand({
       TableName: process.env.DYNAMODB_TABLE
     });
   
     const response = await docClient.send(command);
-    return JSON.stringify(response.Items)
+    return response.Items
   }
 }
