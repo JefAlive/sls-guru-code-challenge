@@ -1,6 +1,11 @@
+import { v4 as uuid } from "uuid";
+
 export class Todo {
-  constructor(props: Todo) {
+  constructor(props: Omit<Todo, "id">, id?: string) {
     Object.assign(this, props);
+    if (!id) {
+      this.id = uuid();
+    }
   }
 
   public readonly id?: string;

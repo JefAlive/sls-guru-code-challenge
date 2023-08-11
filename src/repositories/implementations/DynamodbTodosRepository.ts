@@ -1,6 +1,5 @@
 import { Todo } from "../../entities/Todo"
 import { ITodosRepository } from "../ITodosRepository"
-import { v4 as uuidv4 } from 'uuid';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutCommand, ScanCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
@@ -14,18 +13,11 @@ const client = new DynamoDBClient({
 })
 const docClient = DynamoDBDocumentClient.from(client)
 
-
-
 export class DynamodbTodosRepository implements ITodosRepository {
-  
   async save(todo: Todo): Promise<any> {
     const command = new PutCommand({
       TableName: process.env.DYNAMODB_TABLE,
-      Item: {
-        id: uuidv4(),
-        description: todo.description,
-        marked: false
-      },
+      Item: todo
     });
   
     return await docClient.send(command);
