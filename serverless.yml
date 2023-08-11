@@ -25,8 +25,12 @@ provider:
     DYNAMODB_TABLE: ${self:service}-${self:custom.stage}
 
 plugins:
+  - serverless-webpack
   - serverless-offline
   - serverless-dynamodb
+
+package:
+  individually: true
 
 custom:
   stages:
@@ -34,6 +38,11 @@ custom:
     - dev
     - prod
   stage: ${opt:stage, 'dev'}
+  webpack:
+    webpackConfig: 'webpack.config.js' # Name of webpack configuration file
+    includeModules: false # Node modules configuration for packaging
+    packager: 'npm' # Packager that will be used to package your external modules
+    excludeFiles: src/**/*.test.js # Provide a glob for files to ignore
   serverless-dynamodb:
     stages:
       - local
