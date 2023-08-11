@@ -18,21 +18,21 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
-    - name: Use Java 17 for dynamodb-local
-      uses: actions/setup-java@v3
-      with:
-        distribution: 'temurin' # See 'Supported distributions' for available options
-        java-version: '17'
     - name: Install npm dependencies
       run: npm ci
     - name: Build TypeScript
       run: npm run build
     - name: Run Unit Tests
       run: npm run test
-    - name: Install DynamoDB
-      run: npx serverless dynamodb install --stage local
-    - name: Run DynamoDB
-      run: npx serverless dynamodb start --stage local
+    - name: Setup DynamoDB Local
+      uses: rrainn/dynamodb-action@v2.0.1
+      with:
+        dbPath: # undefined by default, if this is undefined inMemory will be used
+        sharedDb: # undefined by default
+        delayTransientStatuses: # undefined by default
+        optimizeDbBeforeStartup: # undefined by default
+        port: 8000
+        cors: '*'
     - name: Run Integration Tests
       run: npm run test:e2e
     - name: serverless deploy
