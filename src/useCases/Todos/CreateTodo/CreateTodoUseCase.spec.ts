@@ -12,13 +12,14 @@ describe('when saves todo', () => {
     useCase = new CreateTodoUseCase(repositoryMock);
   })
 
-  test('success with valid uuid and description', async () => {
+  test('success with valid uuid and description and not checked by default', async () => {
     await useCase.execute({
       description: 'A good description'
     })
     expect(repositoryMock.save).toBeCalledWith({
       description: 'A good description',
-      id: expect.stringMatching(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i)
+      id: expect.stringMatching(/^[0-9A-F]{8}-[0-9A-F]{4}-[4][0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i),
+      checked: false
     })
   })
 

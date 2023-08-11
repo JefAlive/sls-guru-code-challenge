@@ -6,10 +6,13 @@ export class Todo {
     if (!id) {
       this.id = uuid();
     }
+    if (!this.checked) {
+      this.checked = false;
+    }
   }
 
   public readonly id?: string;
-  public checked?: string;
+  public checked?: boolean;
   public description?: string;
   public createdAt?: Date;
   public updatedAt?: Date;
