@@ -97,4 +97,34 @@ describe('integration tests', () => {
     expect(response.statusCode).toBe(200)
     expect(data).toHaveLength(0)
   })
+
+  test('rejects creation of todo with description sizes', async () => {
+    // Creates Todo with short description
+    let response = await createHandler({
+      body: JSON.stringify({
+        description: ''
+      })
+    })
+    expect(response.statusCode).toBe(400)
+    expect(response.body).toMatch(/Must be 1 or more characters long/)
+
+    // Creates Todo with long description
+    const longDescription =
+      '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789' +
+      '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789' +
+      '01234567890123456789012345678901234567890123456789012345'
+    response = await createHandler({
+      body: JSON.stringify({
+        description: longDescription
+      })
+    })
+    expect(response.statusCode).toBe(400)
+    expect(response.body).toMatch(/Must be 255 or fewer characters long/)
+
+    // So there is no Todos available
+    response = await listHandler()
+    const data = JSON.parse(response.body)
+    expect(response.statusCode).toBe(200)
+    expect(data).toHaveLength(0)
+  })
 })
