@@ -7,3 +7,4 @@ const useCase = new DeleteTodoUseCase(repository)
 const controller = new DeleteTodoController(useCase)
 
 module.exports.handler = controller.handler
+export default controller.handler

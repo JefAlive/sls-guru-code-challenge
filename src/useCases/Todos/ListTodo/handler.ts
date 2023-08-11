@@ -7,3 +7,4 @@ const useCase = new ListTodoUseCase(repository)
 const controller = new ListTodoController(useCase)
 
 module.exports.handler = controller.handler
+export default controller.handler

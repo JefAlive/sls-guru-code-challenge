@@ -6,13 +6,14 @@ export class CreateTodoController {
   ) {}
 
   handler = async (event) => {
-    await this.createTodoUseCase.execute(JSON.parse(event.body))
+    const response = await this.createTodoUseCase.execute(JSON.parse(event.body))
 
     return {
       statusCode: 200,
       body: JSON.stringify(
         {
-          message: 'Created Todo.'
+          message: 'Created Todo.',
+          id: response
         }
       )
     }

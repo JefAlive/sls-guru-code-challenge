@@ -15,6 +15,7 @@ export class CreateTodoUseCase {
         .max(255, { message: 'Must be 255 or fewer characters long' })
     })
     const todo = new Todo(todoSchema.parse(data))
-    return await this.todoRepository.save(todo)
+    await this.todoRepository.save(todo)
+    return todo.id
   }
 }

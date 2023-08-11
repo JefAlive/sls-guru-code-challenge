@@ -7,3 +7,4 @@ const useCase = new EditTodoUseCase(repository)
 const controller = new EditTodoController(useCase)
 
 module.exports.handler = controller.handler
+export default controller.handler
