@@ -7,7 +7,10 @@ describe('when list todos', () => {
   beforeEach(() => {
     repositoryMock = {
       save: vi.fn(),
-      list: vi.fn(() => [{ description: 'Awesome description' }])
+      find: vi.fn(),
+      list: vi.fn(() => [{ description: 'Awesome description' }]),
+      edit: vi.fn(),
+      delete: vi.fn()
     }
     useCase = new ListTodoUseCase(repositoryMock);
   })

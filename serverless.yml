@@ -48,12 +48,33 @@ functions:
           path: /todos
           method: post
 
+  find:
+    handler: dist/useCases/Todos/FindTodo/handler.handler
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: get
+
   list:
     handler: dist/useCases/Todos/ListTodo/handler.handler
     events:
       - httpApi:
           path: /todos
           method: get
+
+  edit:
+    handler: dist/useCases/Todos/EditTodo/handler.handler
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: put
+
+  delete:
+    handler: dist/useCases/Todos/DeleteTodo/handler.handler
+    events:
+      - httpApi:
+          path: /todos/{id}
+          method: delete
 
 resources:
   Resources:

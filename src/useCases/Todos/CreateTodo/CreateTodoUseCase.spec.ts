@@ -7,7 +7,10 @@ describe('when saves todo', () => {
   beforeEach(() => {
     repositoryMock = {
       save: vi.fn(),
-      list: vi.fn()
+      find: vi.fn(),
+      list: vi.fn(),
+      edit: vi.fn(),
+      delete: vi.fn()
     }
     useCase = new CreateTodoUseCase(repositoryMock);
   })
