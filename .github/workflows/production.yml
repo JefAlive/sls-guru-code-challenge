@@ -20,9 +20,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - name: Build TypeScript
-    - run: npm build
+      run: npm build
     - name: Run tests
-    - run: npm test
+      run: npm test
     - name: serverless deploy
       uses: serverless/github-action@v3.2
       with:
