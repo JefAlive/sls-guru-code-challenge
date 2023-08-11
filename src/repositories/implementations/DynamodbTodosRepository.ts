@@ -3,15 +3,23 @@ import { ITodosRepository } from "../ITodosRepository"
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { PutCommand, ScanCommand, DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 
-const client = new DynamoDBClient({
-  region: 'localhost',
-  endpoint: 'http://0.0.0.0:8000',
-  credentials: {
-    accessKeyId: 'MockAccessKeyId',
-    secretAccessKey: 'MockSecretAccessKey'
-  },
+let options = {};
+if (process.env.IS_OFFLINE) {
+  options = {
+    region: 'localhost',
+    endpoint: 'http://0.0.0.0:8000',
+    credentials: {
+      accessKeyId: 'MockAccessKeyId',
+      secretAccessKey: 'MockSecretAccessKey'
+    }
+  }
+}
+const client = new DynamoDBClient(options)
+const docClient = DynamoDBDocumentClient.from(client, {
+  marshallOptions: {
+    convertClassInstanceToMap: true
+  }
 })
-const docClient = DynamoDBDocumentClient.from(client)
 
 export class DynamodbTodosRepository implements ITodosRepository {
   async save(todo: Todo): Promise<any> {
