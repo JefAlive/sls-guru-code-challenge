@@ -7,7 +7,9 @@
     "build": "tsup src",
     "dev": "tsup src && serverless offline --stage local",
     "test": "vitest",
-    "lint": "eslint 'src/**' --fix"
+    "lint": "eslint 'src/**' --fix",
+    "deploy:dev": "sls deploy -s dev --verbose",
+    "deploy:prod": "sls deploy -s dev --verbose"
   },
   "engines": {
     "node": ">=18.0.0"
