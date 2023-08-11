@@ -24,7 +24,7 @@ jobs:
       run: npm run build
     - name: Run Unit Tests
       run: npm run test
-    - name: Setup DynamoDB Local
+    - name: Run DynamoDB Local
       uses: rrainn/dynamodb-action@v2.0.1
       with:
         dbPath: # undefined by default, if this is undefined inMemory will be used
@@ -34,7 +34,7 @@ jobs:
         port: 8000
         cors: '*'
     - name: Run Migrations
-      run: npx serverless dynamodb migrate --stage local
+      run: npm run db:migrate
     - name: Run Integration Tests
       run: npm run test:e2e
     - name: serverless deploy

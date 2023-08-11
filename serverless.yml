@@ -48,7 +48,7 @@ custom:
       - local
     start:
       port: 8000
-      docker: false
+      docker: true
       inMemory: true
       heapInitial: 200m
       heapMax: 1g

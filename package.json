@@ -8,7 +8,8 @@
     "dev": "tsup src && serverless offline --stage local",
     "test": "vitest unit.spec",
     "test:e2e": "dotenv -e e2e.env vitest e2e.spec",
-    "db": "serverless dynamodb start --stage local",
+    "db:up": "serverless dynamodb start --stage local",
+    "db:migrate": "serverless dynamodb migrate --stage local",
     "lint": "eslint 'src/**' --fix",
     "deploy:dev": "sls deploy -s dev --verbose",
     "deploy:prod": "sls deploy -s dev --verbose"
