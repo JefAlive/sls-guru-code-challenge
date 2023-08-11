@@ -30,9 +30,11 @@ jobs:
     - name: Run Unit Tests
       run: npm run test
     - name: Runs DynamoDB
-      run: |
-        serverless dynamodb install --stage local
-        serverless dynamodb start --stage local
+      uses: serverless/github-action@v3.2
+      with:
+        args: dynamodb install --stage local
+      uses: serverless/github-action@v3.2
+        args: dynamodb start --stage local
     - name: Run Integration Tests
       run: npm run test:e2e
     - name: serverless deploy
