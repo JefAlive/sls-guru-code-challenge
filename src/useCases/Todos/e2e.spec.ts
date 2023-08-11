@@ -98,7 +98,7 @@ describe('integration tests', () => {
     expect(data).toHaveLength(0)
   })
 
-  test('rejects creation of todo with description sizes', async () => {
+  test('rejects creation of todo with invalid description sizes', async () => {
     // Creates Todo with short description
     let response = await createHandler({
       body: JSON.stringify({
@@ -126,5 +126,92 @@ describe('integration tests', () => {
     const data = JSON.parse(response.body)
     expect(response.statusCode).toBe(200)
     expect(data).toHaveLength(0)
+  })
+
+  test('rejects editing of todo with invalid attributes', async () => {
+    // Creates Todo
+    let response = await createHandler({
+      body: JSON.stringify({
+        description: 'Awesome description'
+      })
+    })
+    let data = JSON.parse(response.body)
+    const uuid = data.id
+    expect(response.statusCode).toBe(200)
+    expect(data.message).toBe('Created Todo.')
+    expect(data.id).toBeTypeOf('string')
+
+    // Edits as checked
+    response = await editHandler({
+      pathParameters: {
+        id: uuid
+      },
+      body: JSON.stringify({
+        checked: true,
+        description: 'Another awesome description'
+      })
+    })
+    data = JSON.parse(response.body)
+    expect(response.statusCode).toBe(200)
+    expect(data.message).toBe('Edited Todo.')
+
+    // Tries editing invalid short description
+    response = await editHandler({
+      pathParameters: {
+        id: uuid
+      },
+      body: JSON.stringify({
+        description: ''
+      })
+    })
+    expect(response.statusCode).toBe(400)
+    expect(response.body).toMatch(/Must be 1 or more characters long/)
+
+    // Tries editing invalid long description
+    const longDescription =
+      '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789' +
+      '0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789' +
+      '01234567890123456789012345678901234567890123456789012345'
+    response = await editHandler({
+      pathParameters: {
+        id: uuid
+      },
+      body: JSON.stringify({
+        description: longDescription,
+        checked: false
+      })
+    })
+    expect(response.statusCode).toBe(400)
+    expect(response.body).toMatch(/Must be 255 or fewer characters long/)
+
+    // Tries editing invalid checked attribute
+    response = await editHandler({
+      pathParameters: {
+        id: uuid
+      },
+      body: JSON.stringify({
+        description: 'Some valid description'
+      })
+    })
+    expect(response.statusCode).toBe(400)
+    expect(response.body).toMatch(/invalid_type.*Required/)
+
+    // Finds Todo for asserting
+    response = await findHandler({
+      pathParameters: {
+        id: uuid
+      }
+    })
+    data = JSON.parse(response.body)
+    expect(response.statusCode).toBe(200)
+    expect(data.id).toBe(uuid)
+    expect(data.description).toBe('Another awesome description')
+    expect(data.checked).toBeTruthy()
+
+    // List the only Todo available
+    response = await listHandler()
+    data = JSON.parse(response.body)
+    expect(response.statusCode).toBe(200)
+    expect(data).toHaveLength(1)
   })
 })
