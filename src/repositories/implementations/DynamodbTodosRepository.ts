@@ -17,7 +17,8 @@ if (process.env.IS_OFFLINE) {
 const client = new DynamoDBClient(options)
 const docClient = DynamoDBDocumentClient.from(client, {
   marshallOptions: {
-    convertClassInstanceToMap: true
+    convertClassInstanceToMap: true,
+    removeUndefinedValues: true
   }
 })
 
@@ -34,10 +35,11 @@ export class DynamodbTodosRepository implements ITodosRepository {
     const command = new GetCommand({
       TableName: process.env.DYNAMODB_TABLE,
       Key: {
-        ...id
+        id
       }
     });
-    return await docClient.send(command);
+    const response = await docClient.send(command);
+    return response.Item
   }
   
   async list(): Promise<any> {
@@ -57,7 +59,7 @@ export class DynamodbTodosRepository implements ITodosRepository {
         ":checked": todo.checked
       },
       Key: {
-        ...id
+        id
       }
     });
     return await docClient.send(command);
@@ -67,7 +69,7 @@ export class DynamodbTodosRepository implements ITodosRepository {
     const command = new DeleteCommand({
       TableName: process.env.DYNAMODB_TABLE,
       Key: {
-        ...id
+        id
       }
     });
 
