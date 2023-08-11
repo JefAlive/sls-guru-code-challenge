@@ -1,3 +1,4 @@
+import { ZodError } from 'zod'
 import { CreateTodoUseCase } from './CreateTodoUseCase'
 
 export class CreateTodoController {
@@ -17,10 +18,13 @@ export class CreateTodoController {
         })
       }
     } catch(error) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify(error)
+      if (error instanceof ZodError) {
+        return {
+          statusCode: 400,
+          body: JSON.stringify(error)
+        }
       }
+      throw error
     }
   }
 }

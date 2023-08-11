@@ -10,6 +10,10 @@ export class FindTodoUseCase {
     z.string()
       .uuid({ message: 'Must be a valid UUID v4' })
       .parse(id)
-    return await this.todoRepository.find(id)
+    const data = await this.todoRepository.find(id)
+    if (!data) {
+      throw new Error('not found')
+    }
+    return data;
   }
 }

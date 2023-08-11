@@ -214,4 +214,48 @@ describe('integration tests', () => {
     expect(response.statusCode).toBe(200)
     expect(data).toHaveLength(1)
   })
+
+  test('creates normally when editing without existing id', async () => {
+    const uuid = '8b98a22c-3894-11ee-be56-0242ac120002'
+
+    let response = await editHandler({
+      pathParameters: {
+        id: uuid
+      },
+      body: JSON.stringify({
+        description: 'Some valid description',
+        checked: true
+      })
+    })
+    expect(response.statusCode).toBe(200)
+
+    // List the only Todo available
+    response = await listHandler()
+    const data = JSON.parse(response.body)
+    expect(response.statusCode).toBe(200)
+    expect(data).toHaveLength(1)
+  })
+
+  test('do nothing when try to delete inexistent todo', async () => {
+    const uuid = '8b98a22c-3894-11ee-be56-0242ac120002'
+
+    const response = await deleteHandler({
+      pathParameters: {
+        id: uuid
+      }
+    })
+    expect(response.statusCode).toBe(200)
+  })
+
+  test('not found when tries to find inexistent todo', async () => {
+    const uuid = '8b98a22c-3894-11ee-be56-0242ac120002'
+
+    const response = await findHandler({
+      pathParameters: {
+        id: uuid
+      }
+    })
+    console.log(response)
+    expect(response.statusCode).toBe(404)
+  })
 })
