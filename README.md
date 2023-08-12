@@ -14,7 +14,17 @@ Hi! It's Jef, here is my solution to [Serverless Guru Challenge](https://github.
 
 A To-do is a simple combination of a description and a state (checked or not), so you can create, edit, delete, find and list to-dos.
 
+## Table of Contents
 
+- [Technology Stack](#Technology-Stack)
+- [Features](#Features)
+- [Folder structure](#Folder-structure)
+- [Quick Start](#Quick-Start)
+- [API Reference](#API-Reference)
+- [Deploy](#Deploy)
+- [Tests](#Tests)
+- [CI/CD](#CI/CD)
+- [😁 Thank you!](#😁-Thank-you!)
 
 ## Technology Stack
 
@@ -50,6 +60,8 @@ There are many Serverless Framework templates over the internet using NodeJS, Ty
 - Error handling with clearly messages
 
 ## Folder structure
+
+I'm trying to convince you that you can increase your project with loose coupling and high cohesion 🎉
 
 ```
 .
@@ -113,19 +125,59 @@ So, you can start using the API:
 
 ## API Reference
 
-- 
+Description                 | Method | URL         | Payload     | Response     
+----------------------------|--------|-------------|-------------|--------------
+Create new To-do            | POST   | /todos      | ```{ "description": String }``` | 
+Retrieve To-do by id        | GET    | /todos/{id} | -           | 
+Retrieve all To-dos.        | GET    | /todos      | -           |           
+Edit To-do attributes by id | PUT    | /todos/{id} | ```{"description": String (Required), "checked": Boolean (required) }``` |
+Delete to-do by id           | DELETE | /todos/{id} | -           | 
 
 ## Deploy
 
-- 
+I not recommend you deploying locally, this template are ready to manage it using Github Actions, but you can do this using these commands:
+
+- Deploy to dev environment: `npm run deploy:dev`
+- Deploy to prod environment: `npm run deploy:prod`
 
 ## Tests
 
-- 
+This templates uses Vitest for testing, it's very lightweight and runs very fast.
+
+The tests run in watch mode by default, make changes in your code, hit save and it's like magic.
+
+All you need to do is running the commands below:
+
+- For unit tests: `npm run tests`
+- For integration tests: `npm run tests:e2e`
 
 ## CI/CD
 
-- 
+For configuring CI/CD, follow these steps:
+
+1. Go to https://app.serverless.com > org > access keys > add
+2. Give a name of your choise, and create
+3. Copy the generated `access key`
+4. Then add a new Secret to your Github Repository (Secrets and Variables > New repository secret)
+5. Add SERVERLESS_ACCESS_KEY in `Name` field
+6. Paste your generated `access key` in `Secret` field
+7. Click in Add secret
+
+It's done. From now, when you push code to:
+
+- `develop` branch, `dev` environment will be deployed
+- `main` branch, `prod` environment will be deployed
+
+The pipelines are configured inside `.github/workflows` directory. These pipelines consists in:
+
+- Run JS
+- Install npm dependencies
+- Build TypeScript
+- Run Unit Tests
+- Run DynamoDB Local
+- Run Migrations
+- Run Integration Tests
+- Serverless deploy
 
 ## 😁 Thank you!
 
