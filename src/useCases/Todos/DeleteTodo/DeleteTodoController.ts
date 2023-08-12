@@ -10,7 +10,9 @@ export class DeleteTodoController {
 
     return {
       statusCode: 200,
-      body: JSON.stringify(todo)
+      body: JSON.stringify({
+        message: 'Deleted Todo.'
+      })
     }
   }
 }

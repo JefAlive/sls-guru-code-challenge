@@ -89,7 +89,9 @@ describe('integration tests', () => {
         id: uuid
       }
     })
+    data = JSON.parse(response.body)
     expect(response.statusCode).toBe(200)
+    expect(data.message).toBe('Deleted Todo.')
 
     // So there is no more Todos available
     response = await listHandler()
@@ -244,7 +246,9 @@ describe('integration tests', () => {
         id: uuid
       }
     })
+    const data = JSON.parse(response.body)
     expect(response.statusCode).toBe(200)
+    expect(data.message).toBe('Deleted Todo.')
   })
 
   test('not found when tries to find inexistent todo', async () => {

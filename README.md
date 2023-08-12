@@ -148,8 +148,11 @@ The tests run in watch mode by default, make changes in your code, hit save and 
 
 All you need to do is running the commands below:
 
-- For unit tests: `npm run tests`
-- For integration tests: `npm run tests:e2e`
+- For unit tests:
+  - `npm run tests`
+- For integration tests:
+  - `npm run db:up` (runs DynamoDB)
+  - `npm run tests:e2e` (runs Test Suite)
 
 ## CI/CD
 
