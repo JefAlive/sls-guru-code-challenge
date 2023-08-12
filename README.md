@@ -24,7 +24,7 @@ A To-do is a simple combination of a description and a state (checked or not), s
 - [Deploy](#deploy)
 - [Tests](#tests)
 - [CI/CD](#cicd)
-- [😁 Thank you!](#-thank-you)
+- [Thank you!](#-thank-you)
 
 ## Technology Stack
 
