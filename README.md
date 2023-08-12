@@ -16,15 +16,15 @@ A To-do is a simple combination of a description and a state (checked or not), s
 
 ## Table of Contents
 
-- [Technology Stack](#Technology-Stack)
-- [Features](#Features)
-- [Folder structure](#Folder-structure)
-- [Quick Start](#Quick-Start)
-- [API Reference](#API-Reference)
-- [Deploy](#Deploy)
-- [Tests](#Tests)
-- [CI/CD](#CI/CD)
-- [😁 Thank you!](#😁-Thank-you!)
+- [Technology Stack](#technology-stack)
+- [Features](#features)
+- [Folder structure](#folder-structure)
+- [Quick Start](#quick-start)
+- [API Reference](#api-reference)
+- [Deploy](#deploy)
+- [Tests](#tests)
+- [CI/CD](#cicd)
+- [😁 Thank you!](#-thank-you)
 
 ## Technology Stack
 
