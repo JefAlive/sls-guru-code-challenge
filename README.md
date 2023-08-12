@@ -127,11 +127,11 @@ So, you can start using the API:
 
 Description                 | Method | URL         | Payload     | Response     
 ----------------------------|--------|-------------|-------------|--------------
-Create new To-do            | POST   | /todos      | ```{ "description": String }``` | 
-Retrieve To-do by id        | GET    | /todos/{id} | -           | 
-Retrieve all To-dos.        | GET    | /todos      | -           |           
-Edit To-do attributes by id | PUT    | /todos/{id} | ```{"description": String (Required), "checked": Boolean (required) }``` |
-Delete to-do by id           | DELETE | /todos/{id} | -           | 
+Create new To-do            | POST   | /todos      | `{ "description": String }` | `{ "message": "Created Todo.", "id": UUID }`
+Retrieve To-do by id        | GET    | /todos/{id} | -           | `{ "id": UUID, "description": String, "checked": Boolean }`
+Retrieve all To-dos.        | GET    | /todos      | -           | `[ { "id": UUID, "description": String, "checked": Boolean } ]`
+Edit To-do attributes by id | PUT    | /todos/{id} | `{"description": String (Required), "checked": Boolean (required) }` | `{ "message": "Edited Todo." }`
+Delete to-do by id           | DELETE | /todos/{id} | -           | `{ "message": "Deleted Todo." }`
 
 ## Deploy
 
