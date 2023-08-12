@@ -5,7 +5,7 @@
   "author": "Jeferson Kersten",
   "scripts": {
     "build": "tsup src",
-    "dev": "tsup src && serverless offline --stage local",
+    "dev": "tsup src && serverless offline --stage local --skip-build",
     "test": "vitest unit.spec",
     "test:e2e": "dotenv -e e2e.env -o -- vitest e2e.spec",
     "db:up": "serverless dynamodb start --stage local",
@@ -32,7 +32,6 @@
     "serverless-dynamodb": "^0.2.43",
     "serverless-offline": "^12.0.4",
     "serverless-webpack": "^5.13.0",
-    "supertest": "^6.3.3",
     "tsup": "^7.2.0",
     "typescript": "^5.1.6",
     "vitest": "^0.34.1"
