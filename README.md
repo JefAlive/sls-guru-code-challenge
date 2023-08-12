@@ -1,92 +1,134 @@
-<!--
-title: 'AWS Simple HTTP Endpoint example in NodeJS'
-description: 'This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+<p align="center">
+  <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 256 204"><path fill="#F26D61" d="M0 161.202h45.312l-14.039 42.396H0v-42.396ZM0 80.6h72l-14.036 42.396H0V80.601ZM0 0h98.692l-14.04 42.395H0V0Zm143.349 0H256v42.395H129.312L143.349 0ZM116.66 80.6H256v42.397H102.622l14.038-42.396Zm-26.69 80.602H256v42.396H75.933l14.037-42.396Z"/></svg>
+</p>
+<h1 align="center">
+  To-do List Serverless API
+</h1>
+<p align="center">
+  A blazing fast and lightweight To-do list API powered by Serverless Framework and AWS Lambda. 🚀
+</p>
 
-# Serverless Framework Node HTTP API on AWS
+## Introduction
 
-This template demonstrates how to make a simple HTTP API with Node.js running on AWS Lambda and API Gateway using the Serverless Framework.
+Hi! It's Jef, here is my solution to [Serverless Guru Challenge](https://github.com/serverless-guru/code-challenges/tree/master/code-challenge-5), I made a To-do list API using Serverless Framework and AWS Lambda.
 
-This template does not include any kind of persistence (database). For more advanced examples, check out the [serverless/examples repository](https://github.com/serverless/examples/) which includes Typescript, Mongo, DynamoDB and other examples.
+A To-do is a simple combination of a description and a state (checked or not), so you can create, edit, delete, find and list to-dos.
 
-## Usage
 
-### Deployment
+
+## Technology Stack
+
+- NodeJS
+- TypeScript
+- Serverless Framework v3
+- AWS SDK v3 (TypeScript support)
+- AWS Lambda (Node 18)
+- AWS API Integration (HTTP API)
+- AWS DynamoDB
+- Tsup (bundle TypeScript with no config)
+- Vitest (for unit and integration tests with no config)
+- Zod (for input validations cleanest way possible)
+- Webpack (for small lambda packages)
+- Github Actions (for CI/CD)
+
+## Features
+
+There are many Serverless Framework templates over the internet using NodeJS, TypeScript, AWS Lambda, API Gateway and DynamoDB, but here's **why you should use mine template**:
+
+- **Folder structure organized by feature set**: Increase your project with loose coupling and high cohesion
+- **Clean architecture**:
+  - Separated in Controllers, Use Cases, Repositories, DTOs, Entities
+  - Fully SOLID principles compliant
+  - Pure TypeScript: very lightweight (**you don't need a NestJS increasing your bundle and lambda running time, 🤔 huh?**)
+- **Repository interface**: you could change database with less effort
+- Small lambda .zip packages (less than 700 kB)
+- Unit and Integration tests
+- Support to run Lambda locally
+- Runs a DynamoDB locally on Docker
+- Multi-stage support (`local`, `dev`, `prod`)
+- Automatically deploy `dev` and `prod` environments on push to `develop` and `main` branches
+- Error handling with clearly messages
+
+## Folder structure
 
 ```
-$ serverless deploy
+.
+└── src/
+    ├── entities/
+    │   └── Todo.ts
+    ├── repositories/
+    │   ├── ITodosRepository.ts (repository specification)
+    │   └── implementations/
+    │       └── DynamodbTodosRepository.ts (connects to DynamoDB)
+    └── useCases/
+        └── Todos/
+            ├── CreateTodo/
+            │   ├── CreateTodoController.ts
+            │   ├── CreateTodoDTO.ts
+            │   ├── CreateTodoUseCase.ts
+            │   ├── CreateTodoUseCase.unit.spec.ts (Unit Test)
+            │   └── handler.js
+            ├── DeleteTodo/
+            ├── EditTodo/
+            ├── FindTodo/
+            ├── ListTodo/
+            └── e2e.spec.ts (Integration Tests for Todos domain)
 ```
 
-After deploying, you should see output similar to:
+## Quick Start
 
-```bash
-Deploying aws-node-http-api-project to stage dev (us-east-1)
+1. `npm install` (install dependencies)
+2. `npm run db:up` (install and run DynamoDB with Docker on port 8000)
+3. `npm run db:migrate` (create table on DynamoDB)
+4. `npm run dev` (build TypeScript and runs server on port 3000)
 
-✔ Service deployed to stack aws-node-http-api-project-dev (152s)
+If everything is ok, you will see:
 
-endpoint: GET - https://xxxxxxxxxx.execute-api.us-east-1.amazonaws.com/
-functions:
-  hello: aws-node-http-api-project-dev-hello (1.9 kB)
+```
+Server ready: http://localhost:3000 🚀
 ```
 
-_Note_: In current form, after deployment, your API is public and can be invoked by anyone. For production deployments, you might want to configure an authorizer. For details on how to do that, refer to [http event docs](https://www.serverless.com/framework/docs/providers/aws/events/apigateway/).
+So, you can start using the API:
 
-### Invocation
+```sh
+> curl -X POST http://localhost:3000/todos -H "Content-Type: application/json" -d '{"description": "Awesome description"}'
 
-After successful deployment, you can call the created application via HTTP:
-
-```bash
-curl https://xxxxxxx.execute-api.us-east-1.amazonaws.com/
-```
-
-Which should result in response similar to the following (removed `input` content for brevity):
-
-```json
 {
-  "message": "Go Serverless v2.0! Your function executed successfully!",
-  "input": {
-    ...
+  "message": "Created Todo.",
+  "id": "5fa7083b-9386-44ce-8060-1f2a9c068e75"
+}
+```
+
+```
+> curl -X GET http://localhost:3000/todos -H "Content-Type: application/json"
+
+[
+  {
+    "id":"5fa7083b-9386-44ce-8060-1f2a9c068e75",
+    "description": "Awesome description",
+    "checked": false
   }
-}
+]
 ```
 
-### Local development
+## API Reference
 
-You can invoke your function locally by using the following command:
+- 
 
-```bash
-serverless invoke local --function hello
-```
+## Deploy
 
-Which should result in response similar to the following:
+- 
 
-```
-{
-  "statusCode": 200,
-  "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
-}
-```
+## Tests
 
+- 
 
-Alternatively, it is also possible to emulate API Gateway and Lambda locally by using `serverless-offline` plugin. In order to do that, execute the following command:
+## CI/CD
 
-```bash
-serverless plugin install -n serverless-offline
-```
+- 
 
-It will add the `serverless-offline` plugin to `devDependencies` in `package.json` file as well as will add it to `plugins` in `serverless.yml`.
+## 😁 Thank you!
 
-After installation, you can start local emulation with:
+You arrived here, so thank you, was a good experience develop this challenge, see ya!
 
-```
-serverless offline
-```
-
-To learn more about the capabilities of `serverless-offline`, please refer to its [GitHub repository](https://github.com/dherault/serverless-offline).
+[LinkedIn](https://linkedin.com/in/jeferson-kersten/) | [mailto:jeferson.kersten@gmail.com](mailto:jeferson.kersten@gmail.com)
